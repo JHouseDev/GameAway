@@ -1,0 +1,192 @@
+{
+    "project_name": "GameAway",
+    "description": "An offline-first Android multi-game application featuring Chess, Checkers, and Hangman",
+    "version": "1.0.0",
+    
+    "technical_requirements": {
+        "minimum_android_api": 24,
+        "target_android_api": 34,
+        "minimum_ram": "2GB",
+        "offline_capability": true
+    },
+
+    "architecture": {
+        "pattern": "Clean Architecture",
+        "modules": [
+            {
+                "name": "app",
+                "responsibilities": [
+                    "App entry point",
+                    "Navigation",
+                    "Themes",
+                    "Shared UI components"
+                ]
+            },
+            {
+                "name": "core",
+                "responsibilities": [
+                    "Base classes",
+                    "Shared utilities",
+                    "Common dependencies"
+                ]
+            },
+            {
+                "name": "games",
+                "submodules": ["chess", "checkers", "hangman"],
+                "structure": {
+                    "domain": ["Game logic", "Models", "Use cases"],
+                    "ui": ["Composables", "ViewModels"],
+                    "data": ["Repository", "Local data source"]
+                }
+            }
+        ]
+    },
+
+    "tech_stack": {
+        "language": {
+            "name": "Kotlin",
+            "version": "1.9.0",
+            "rules": [
+                "Use @OptIn for experimental APIs",
+                "Prefer Kotlin idioms and extensions",
+                "Use data classes for models"
+            ]
+        },
+        "ui_framework": {
+            "name": "Jetpack Compose",
+            "version": "1.6.0",
+            "rules": [
+                "No XML layouts",
+                "Use Modifier chaining",
+                "Follow Material Design 3 guidelines",
+                "Implement responsive layouts"
+            ]
+        },
+        "database": {
+            "name": "Room + SQLite",
+            "version": "2.6.0",
+            "rules": [
+                "Use TypeConverters for complex objects",
+                "Implement DAOs for each game",
+                "Handle migrations properly"
+            ]
+        },
+        "dependency_injection": {
+            "name": "Hilt",
+            "version": "2.48",
+            "rules": [
+                "Annotate ViewModels with @HiltViewModel",
+                "Use @Inject for constructor injection",
+                "Provide dependencies at appropriate scope"
+            ]
+        },
+        "async": {
+            "name": "Coroutines + Flow",
+            "version": "1.7.3",
+            "rules": [
+                "Use viewModelScope for lifecycle-aware operations",
+                "Implement proper error handling",
+                "Use appropriate dispatchers"
+            ]
+        }
+    },
+
+    "code_quality": {
+        "testing": {
+            "coverage_target": 90,
+            "requirements": [
+                "Unit tests for game logic",
+                "UI tests for critical paths",
+                "Integration tests for data layer"
+            ]
+        },
+        "documentation": {
+            "requirements": [
+                "KDoc for public APIs",
+                "README for each module",
+                "Architecture documentation"
+            ]
+        },
+        "performance": {
+            "rules": [
+                "No UI blocking operations",
+                "Efficient resource management",
+                "Memory leak prevention"
+            ]
+        }
+    },
+
+    "game_specific_rules": {
+        "chess": {
+            "features": [
+                "8x8 board representation",
+                "All standard chess rules",
+                "Move validation",
+                "Check/Checkmate detection",
+                "Save/Load game state"
+            ],
+            "ui_requirements": [
+                "Draggable pieces",
+                "Move highlighting",
+                "Promotion dialog"
+            ]
+        },
+        "checkers": {
+            "features": [
+                "8x8 board representation",
+                "Standard checkers rules",
+                "Mandatory capture enforcement",
+                "King promotion",
+                "Save/Load game state"
+            ],
+            "ui_requirements": [
+                "Draggable pieces",
+                "Valid move highlighting",
+                "Multi-capture visualization"
+            ]
+        },
+        "hangman": {
+            "features": [
+                "Word categories",
+                "Difficulty levels",
+                "Score tracking",
+                "Save/Load game state"
+            ],
+            "ui_requirements": [
+                "Progressive hangman drawing",
+                "Virtual keyboard",
+                "Word display with blanks"
+            ]
+        }
+    },
+
+    "accessibility": {
+        "requirements": [
+            "WCAG 2.1 compliance",
+            "Screen reader support",
+            "Color contrast requirements",
+            "Touch target sizes >= 48dp"
+        ]
+    },
+
+    "data_management": {
+        "persistence": {
+            "game_state": "Room Database",
+            "settings": "EncryptedSharedPreferences",
+            "requirements": [
+                "Automatic state saving",
+                "Crash recovery",
+                "Data migration support"
+            ]
+        }
+    },
+
+    "error_handling": {
+        "requirements": [
+            "Graceful error recovery",
+            "User-friendly error messages",
+            "Logging for debugging",
+            "Crash reporting setup"
+        ]
+    }
+} 
